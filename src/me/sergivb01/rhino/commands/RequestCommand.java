@@ -33,7 +33,7 @@ public class RequestCommand implements CommandExecutor{
 		}
 
 		Cache.addPlayerDelay(player);
-		new RequestPayload(player, reason).send();
+		new RequestPayload(player.getName(), player.getUniqueId(), reason).send();
 
 		return true;
 	}

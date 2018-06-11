@@ -2,13 +2,16 @@ package me.sergivb01.rhino.redis.pubsub;
 
 import lombok.Getter;
 import me.sergivb01.rhino.RhinoPlugin;
+import me.sergivb01.rhino.payloads.utils.PayloadParser;
 import me.sergivb01.rhino.utils.ConfigUtils;
+import org.bson.Document;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
 import java.util.Arrays;
 
-@Getter public class Subscriber{
+@Getter
+public class Subscriber{
 	private RhinoPlugin instance;
 	private JedisPubSub jedisPubSub;
 	private Jedis jedis;
@@ -36,7 +39,10 @@ import java.util.Arrays;
 				//TODO: Implement encryption (?)
 
 				if(command.equalsIgnoreCase("payload")){
-					//TODO: Parse payloads
+					Document document = Document.parse(args[1]);
+					if(document != null){
+						PayloadParser.parse(document);
+					}
 					return;
 				}
 
@@ -47,13 +53,17 @@ import java.util.Arrays;
 			public void onPMessage(String s, String s1, String s2){
 
 			}
+
 			public void onSubscribe(String s, int i){
 
 			}
+
 			public void onUnsubscribe(String s, int i){
 			}
+
 			public void onPUnsubscribe(String s, int i){
 			}
+
 			public void onPSubscribe(String s, int i){
 			}
 		};

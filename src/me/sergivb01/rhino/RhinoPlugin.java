@@ -1,6 +1,7 @@
 package me.sergivb01.rhino;
 
 import lombok.Getter;
+import me.sergivb01.rhino.commands.DebugCommand;
 import me.sergivb01.rhino.commands.ReportCommand;
 import me.sergivb01.rhino.commands.RequestCommand;
 import me.sergivb01.rhino.listeners.PlayerListener;
@@ -19,14 +20,14 @@ public class RhinoPlugin extends JavaPlugin{
 	public void onEnable(){
 		instance = this;
 
-		getLogger().info("Enabling Rhino plugin - Developed by sergivb01 (twitter.com/sergivb01 - github.com/sergivb01)");
-
 		//Load configuration
 		final File configFile = new File(this.getDataFolder() + "/config.yml");
 		if(!configFile.exists()){
 			this.saveDefaultConfig();
 		}
 		this.getConfig().options().copyDefaults(true);
+
+		getLogger().info("Enabling Rhino plugin - Developed by sergivb01 (twitter.com/sergivb01 - github.com/sergivb01)");
 
 
 		new RedisManager(this);
@@ -42,6 +43,7 @@ public class RhinoPlugin extends JavaPlugin{
 	private void registerCommands(){
 		getCommand("report").setExecutor(new ReportCommand());
 		getCommand("request").setExecutor(new RequestCommand());
+		getCommand("debug").setExecutor(new DebugCommand());
 
 		Map<String, Map<String, Object>> map = getDescription().getCommands();
 		for(Map.Entry<String, Map<String, Object>> entry : map.entrySet()){
@@ -52,6 +54,9 @@ public class RhinoPlugin extends JavaPlugin{
 	}
 
 	public void onDisable(){
+		RedisManager.subscriber.getJedis().shutdown();
+		RedisManager.publisher.getPool().destroy();
+
 		getLogger().info("Shutting down Rhino plugin - Developed by sergivb01 (twitter.com/sergivb01 - github.com/sergivb01)");
 	}
 

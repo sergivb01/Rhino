@@ -5,10 +5,11 @@ import me.sergivb01.rhino.RhinoPlugin;
 import me.sergivb01.rhino.redis.pubsub.Publisher;
 import me.sergivb01.rhino.redis.pubsub.Subscriber;
 
-@Getter public class RedisManager{
-	private RhinoPlugin plugin;
+@Getter
+public class RedisManager{
 	public static Publisher publisher;
 	public static Subscriber subscriber;
+	private RhinoPlugin plugin;
 
 	public RedisManager(RhinoPlugin plugin){
 		this.plugin = plugin;

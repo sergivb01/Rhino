@@ -17,7 +17,7 @@ public class Publisher{
 		}else{
 			pool = new JedisPool(new JedisPoolConfig(), ConfigUtils.REDIS_HOST, ConfigUtils.REDIS_PORT, 2000);
 		}
-		this.channel = "channel";
+		this.channel = ConfigUtils.REDIS_CHANNEL;
 	}
 
 	public void write(final String message){

@@ -1,8 +1,8 @@
 package me.sergivb01.rhino;
 
-import me.sergivb01.rhino.payloads.Payload;
 import me.sergivb01.rhino.payloads.ReportPayload;
 import me.sergivb01.rhino.payloads.RequestPayload;
+import me.sergivb01.rhino.payloads.utils.Payload;
 import org.bukkit.entity.Player;
 
 import java.util.*;

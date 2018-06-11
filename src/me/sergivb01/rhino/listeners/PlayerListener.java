@@ -1,6 +1,7 @@
 package me.sergivb01.rhino.listeners;
 
 import me.sergivb01.rhino.RhinoPlugin;
+import me.sergivb01.rhino.payloads.ServerSwitchPayload;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -18,14 +19,14 @@ public class PlayerListener implements Listener{
 	public void onPlayerJoin(PlayerJoinEvent event){
 		Player player = event.getPlayer();
 
-		//TODO: Handle player join
+		new ServerSwitchPayload(player.getName(), player.getUniqueId(), "joined", player.hasPermission("rhino.utils.staff")).send();
 	}
 
 	@EventHandler
 	public void onPlayerQuit(PlayerQuitEvent event){
 		Player player = event.getPlayer();
 
-		//TODO: Handle player quit
+		new ServerSwitchPayload(player.getName(), player.getUniqueId(), "quit", player.hasPermission("rhino.utils.staff")).send();
 	}
 
 

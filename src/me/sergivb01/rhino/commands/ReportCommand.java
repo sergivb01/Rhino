@@ -44,7 +44,7 @@ public class ReportCommand implements CommandExecutor{
 		}
 
 		Cache.addPlayerDelay(player);
-		new ReportPayload(player, target, reason).send();
+		new ReportPayload(player.getName(), player.getUniqueId(), target.getName(), target.getUniqueId(), reason).send();
 
 		return true;
 	}

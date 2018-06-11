@@ -1,9 +1,8 @@
 package me.sergivb01.rhino.payloads;
 
 import lombok.Getter;
-import me.sergivb01.rhino.utils.ConfigUtils;
+import me.sergivb01.rhino.payloads.utils.Payload;
 import org.bson.Document;
-import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -19,33 +18,32 @@ public class ReportPayload extends Payload{
 
 	private String reason;
 
-	public ReportPayload(Player reporter, Player reported, String reason){
-		super(ConfigUtils.SERVER_NAME, System.currentTimeMillis());
+	public ReportPayload(String reporterName, UUID reporterUUID, String reportedName, UUID reportedUUID, String reason){
+		super("report");
 		this.uuid = UUID.randomUUID();
-		this.reporterName = reporter.getName();
-		this.reporterUUID = reporter.getUniqueId();
-		this.reportedName = reported.getName();
-		this.reportedUUID = reported.getUniqueId();
+		this.reporterName = reporterName;
+		this.reporterUUID = reporterUUID;
+		this.reportedName = reportedName;
+		this.reportedUUID = reportedUUID;
 		this.reason = reason;
 	}
 
 	public void fromDocument(Document document){
 		this.reporterName = document.getString("reporterName");
-		this.reporterUUID = UUID.fromString(document.getString("reporterUUID"));
+		this.reporterUUID = (UUID) document.get("reporterUUID");
 		this.reportedName = document.getString("reportedName");
-		this.reportedUUID = UUID.fromString(document.getString("reportedUUID"));
+		this.reportedUUID = (UUID) document.get("reportedUUID");
 		this.reason = document.getString("reason");
-		this.uuid = UUID.fromString(document.getString("uuid"));
+		this.uuid = (UUID) document.get("uuid");
 	}
 
 	public Document toDocument(){
-		return new Document("type", "report")
-				.append("reporterName", reportedName)
-				.append("reporterUUID", reportedUUID.toString())
+		return new Document("reporterName", reportedName)
+				.append("reporterUUID", reportedUUID)
 				.append("reportedName", reportedName)
-				.append("reportedUUID", reportedUUID.toString())
+				.append("reportedUUID", reportedUUID)
 				.append("reason", reason)
-				.append("uuid", uuid.toString());
+				.append("uuid", uuid);
 	}
 
 
