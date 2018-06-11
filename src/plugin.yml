@@ -1,0 +1,6 @@
+name: Rhino
+main: me.sergivb01.rhino.RhinoPlugin
+version: 0.1-DEV
+author: sergivb01
+commands:
+  #None
