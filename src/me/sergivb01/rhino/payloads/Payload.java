@@ -1,5 +1,7 @@
 package me.sergivb01.rhino.payloads;
 
+import org.bson.Document;
+
 public abstract class Payload{
 	private String server;
 	private long timestamp;
@@ -27,5 +29,10 @@ public abstract class Payload{
 	}
 
 	public abstract void send();
+
+	public abstract void fromDocument(Document document);
+
+	public abstract Document toDocument();
+
 
 }
