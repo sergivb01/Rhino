@@ -1,5 +1,6 @@
 package me.sergivb01.rhino;
 
+import me.sergivb01.rhino.listeners.PlayerListener;
 import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -17,7 +18,11 @@ public class RhinoPlugin extends JavaPlugin{
 		this.getConfig().options().copyDefaults(true);
 
 		registerCommands();
+
+		new PlayerListener(this);
+
 	}
+
 
 	private void registerCommands(){
 
