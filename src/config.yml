@@ -1,0 +1,9 @@
+server-name: 'HCFactions'
+
+redis:
+  host: '127.0.0.1'
+  port: 6379
+  channel: 'rhino-con'
+  auth:
+    enabled: false
+    password: 'mysecurepassword'

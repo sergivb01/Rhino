@@ -1,5 +1,6 @@
 package me.sergivb01.rhino.payloads;
 
+import me.sergivb01.rhino.redis.RedisManager;
 import org.bson.Document;
 
 public abstract class Payload{
@@ -28,7 +29,9 @@ public abstract class Payload{
 		return super.equals(obj);
 	}
 
-	public abstract void send();
+	public void send(){
+		RedisManager.publisher.write("payload;" + this.toDocument().toJson());
+	}
 
 	public abstract void fromDocument(Document document);
 

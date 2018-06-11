@@ -49,9 +49,4 @@ public class ReportPayload extends Payload{
 	}
 
 
-	public void send(){
-		//TODO: Handle send
-	}
-
-
 }

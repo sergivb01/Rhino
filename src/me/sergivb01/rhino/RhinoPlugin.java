@@ -4,6 +4,7 @@ import lombok.Getter;
 import me.sergivb01.rhino.commands.ReportCommand;
 import me.sergivb01.rhino.commands.RequestCommand;
 import me.sergivb01.rhino.listeners.PlayerListener;
+import me.sergivb01.rhino.redis.RedisManager;
 import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,6 +28,9 @@ public class RhinoPlugin extends JavaPlugin{
 		}
 		this.getConfig().options().copyDefaults(true);
 
+
+		new RedisManager(this);
+		getLogger().info("Redis manager has been created!");
 
 		registerCommands();
 

@@ -35,10 +35,6 @@ public class RequestPayload extends Payload{
 				.append("uuid", uuid.toString());
 	}
 
-	public void send(){
-		//TODO: Handle send
-	}
-
 
 }
 
