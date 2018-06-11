@@ -1,5 +1,7 @@
 package me.sergivb01.rhino.commands;
 
+import me.sergivb01.rhino.Cache;
+import me.sergivb01.rhino.payloads.RequestPayload;
 import me.sergivb01.rhino.utils.StringUtils;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,12 +24,16 @@ public class RequestCommand implements CommandExecutor{
 			return true;
 		}
 
-		//TODO: Check if last request > 5m
-
 		String reason = StringUtils.join(args);
 
-		//TODO: Handle request
 
+		if(!Cache.canExecute(player)){
+			player.sendMessage(RED + "You hav already used the report or request command in the past 5 minutes! Please wait and try again.");
+			return true;
+		}
+
+		Cache.addPlayerDelay(player);
+		new RequestPayload(player, reason).send();
 
 		return true;
 	}

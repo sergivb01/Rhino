@@ -2,6 +2,7 @@ package me.sergivb01.rhino.payloads;
 
 import me.sergivb01.rhino.utils.ConfigUtils;
 import org.bson.Document;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -11,11 +12,11 @@ public class RequestPayload extends Payload{
 	private UUID playerUUID;
 	private String reason;
 
-	public RequestPayload(String playerName, UUID playerUUID, String reason){
+	public RequestPayload(Player player, String reason){
 		super(ConfigUtils.SERVER_NAME, System.currentTimeMillis());
 		this.uuid = UUID.randomUUID();
-		this.playerName = playerName;
-		this.playerUUID = playerUUID;
+		this.playerName = player.getName();
+		this.playerUUID = player.getUniqueId();
 		this.reason = reason;
 	}
 

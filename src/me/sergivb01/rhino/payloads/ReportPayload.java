@@ -3,6 +3,7 @@ package me.sergivb01.rhino.payloads;
 import lombok.Getter;
 import me.sergivb01.rhino.utils.ConfigUtils;
 import org.bson.Document;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -18,13 +19,13 @@ public class ReportPayload extends Payload{
 
 	private String reason;
 
-	public ReportPayload(String reporterName, UUID reporterUUID, String reportedName, UUID reportedUUID, String reason){
+	public ReportPayload(Player reporter, Player reported, String reason){
 		super(ConfigUtils.SERVER_NAME, System.currentTimeMillis());
 		this.uuid = UUID.randomUUID();
-		this.reporterName = reporterName;
-		this.reporterUUID = reporterUUID;
-		this.reportedName = reportedName;
-		this.reportedUUID = reportedUUID;
+		this.reporterName = reporter.getName();
+		this.reporterUUID = reporter.getUniqueId();
+		this.reportedName = reported.getName();
+		this.reportedUUID = reported.getUniqueId();
 		this.reason = reason;
 	}
 

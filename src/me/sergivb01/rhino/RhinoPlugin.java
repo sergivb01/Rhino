@@ -1,6 +1,8 @@
 package me.sergivb01.rhino;
 
 import lombok.Getter;
+import me.sergivb01.rhino.commands.ReportCommand;
+import me.sergivb01.rhino.commands.RequestCommand;
 import me.sergivb01.rhino.listeners.PlayerListener;
 import org.bukkit.ChatColor;
 import org.bukkit.command.PluginCommand;
@@ -10,7 +12,8 @@ import java.io.File;
 import java.util.Map;
 
 public class RhinoPlugin extends JavaPlugin{
-	@Getter public static RhinoPlugin instance;
+	@Getter
+	public static RhinoPlugin instance;
 
 	public void onEnable(){
 		instance = this;
@@ -33,12 +36,14 @@ public class RhinoPlugin extends JavaPlugin{
 
 
 	private void registerCommands(){
+		getCommand("report").setExecutor(new ReportCommand());
+		getCommand("request").setExecutor(new RequestCommand());
 
 		Map<String, Map<String, Object>> map = getDescription().getCommands();
 		for(Map.Entry<String, Map<String, Object>> entry : map.entrySet()){
 			PluginCommand command = getCommand(entry.getKey());
 			command.setPermission("rhino.command." + entry.getKey());
-			command.setPermissionMessage(ChatColor.translateAlternateColorCodes('&', "&e&l⚠ &cYou do not have permissions to execute this command."));
+			command.setPermissionMessage(ChatColor.translateAlternateColorCodes('&', "&e&l⚠ &cYou lack the permission to execute this command."));
 		}
 	}
 
