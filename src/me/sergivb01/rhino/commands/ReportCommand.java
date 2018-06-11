@@ -1,6 +1,8 @@
 package me.sergivb01.rhino.commands;
 
+import me.sergivb01.rhino.payloads.ReportPayload;
 import me.sergivb01.rhino.utils.StringUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -22,10 +24,22 @@ public class ReportCommand implements CommandExecutor{
 			return true;
 		}
 
-		String reported = args[0];
+		Player target = Bukkit.getPlayer(args[0]);
 		String reason = StringUtils.join(args, 1);
 
-		//TODO: Send report
+		if(target == null){
+			player.sendMessage(RED + "Player `" + args[0] + "` is not online or has never joined before!");
+			return true;
+		}
+
+		if(player.equals(target)){
+			player.sendMessage(RED + "You may not report yourself!");
+			return true;
+		}
+
+		//TODO: Check if last report > 5m
+
+		new ReportPayload(player.getName(), player.getUniqueId(), target.getName(), target.getUniqueId(), reason).send();
 
 
 		return true;

@@ -25,4 +25,7 @@ public abstract class Payload{
 	public boolean equals(Object obj){
 		return super.equals(obj);
 	}
+
+	public abstract void send();
+
 }

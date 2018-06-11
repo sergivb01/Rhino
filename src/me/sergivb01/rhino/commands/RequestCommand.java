@@ -22,6 +22,8 @@ public class RequestCommand implements CommandExecutor{
 			return true;
 		}
 
+		//TODO: Check if last request > 5m
+
 		String reason = StringUtils.join(args);
 
 		//TODO: Handle request
