@@ -27,11 +27,8 @@ public class RhinoPlugin extends JavaPlugin{
 		}
 		this.getConfig().options().copyDefaults(true);
 
-		getLogger().info("Enabling Rhino plugin - Developed by sergivb01 (twitter.com/sergivb01 - github.com/sergivb01)");
-
 
 		new RedisManager(this);
-		getLogger().info("Redis manager has been created!");
 
 		registerCommands();
 
@@ -56,8 +53,6 @@ public class RhinoPlugin extends JavaPlugin{
 	public void onDisable(){
 		RedisManager.subscriber.getJedis().shutdown();
 		RedisManager.publisher.getPool().destroy();
-
-		getLogger().info("Shutting down Rhino plugin - Developed by sergivb01 (twitter.com/sergivb01 - github.com/sergivb01)");
 	}
 
 
