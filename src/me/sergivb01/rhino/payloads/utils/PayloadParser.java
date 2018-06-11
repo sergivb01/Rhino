@@ -8,29 +8,36 @@ import me.sergivb01.rhino.payloads.ServerSwitchPayload;
 import me.sergivb01.rhino.utils.ConfigUtils;
 import org.bson.Document;
 
-import java.util.Objects;
-
 public class PayloadParser{
 
 	public static void parse(Document document){
-		if(document.getString("server").equalsIgnoreCase(ConfigUtils.SERVER_NAME)) return;
+		String server = document.getString("server");
+		String type = document.getString("type");
 
-		Payload payload = null;
-		switch(document.getString("type").toLowerCase()){
-			case "report":
-				payload = new ReportPayload(null, null, null, null, null);
-				break;
-			case "request":
-				payload = new RequestPayload(null, null, null);
-				break;
-			case "serverswitch":
-				payload = new ServerSwitchPayload(null, null, null, false);
-				break;
+		if(server.equalsIgnoreCase(ConfigUtils.SERVER_NAME)) return;
+
+		Payload payload = getPayloadFromType(type);
+		if(payload == null){
+			RhinoPlugin.getInstance().getLogger().severe("Failed to parse payload - " + document.toJson());
+			return;
 		}
-		Objects.requireNonNull(payload).fromDocument(document);
 
+		payload.fromDocument(document);
 		Cache.addPayload(payload);
-		RhinoPlugin.instance.getLogger().info("Parsed payload " + payload.toDocument().toJson() + "!");
+	}
+
+	public static Payload getPayloadFromType(String type){
+		switch(type.toLowerCase()){
+			case "report":
+				return new ReportPayload();
+
+			case "request":
+				return new RequestPayload();
+
+			case "serverswitch":
+				return new ServerSwitchPayload();
+		}
+		return null;
 	}
 
 }

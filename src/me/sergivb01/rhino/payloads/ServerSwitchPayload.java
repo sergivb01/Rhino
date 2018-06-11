@@ -1,16 +1,21 @@
 package me.sergivb01.rhino.payloads;
 
+import lombok.Getter;
 import me.sergivb01.rhino.payloads.utils.Payload;
 import org.bson.Document;
 
 import java.util.UUID;
 
-public class ServerSwitchPayload extends Payload{
+ @Getter public class ServerSwitchPayload extends Payload{
 	private UUID uuid;
 	private String playerName;
 	private UUID playerUUID;
 	private boolean staff;
 	private String status;
+
+	public ServerSwitchPayload(){
+		super("serverswitch");
+	}
 
 	public ServerSwitchPayload(String playerName, UUID playerUUID, String status, boolean staff){
 		super("serverswitch");
@@ -37,4 +42,9 @@ public class ServerSwitchPayload extends Payload{
 				.append("staff", staff)
 				.append("uuid", uuid);
 	}
+
+	 public void broadcast(){
+		 //TODO: Broadcast
+	 }
+
 }

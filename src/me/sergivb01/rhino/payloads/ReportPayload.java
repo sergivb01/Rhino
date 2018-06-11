@@ -18,6 +18,10 @@ public class ReportPayload extends Payload{
 
 	private String reason;
 
+	public ReportPayload(){
+		super("report");
+	}
+
 	public ReportPayload(String reporterName, UUID reporterUUID, String reportedName, UUID reportedUUID, String reason){
 		super("report");
 		this.uuid = UUID.randomUUID();
@@ -44,6 +48,10 @@ public class ReportPayload extends Payload{
 				.append("reportedUUID", reportedUUID)
 				.append("reason", reason)
 				.append("uuid", uuid);
+	}
+
+	public void broadcast(){
+		//TODO: Broadcast
 	}
 
 

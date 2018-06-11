@@ -32,5 +32,7 @@ public abstract class Payload{
 
 	public abstract Document toDocument();
 
+	public abstract void broadcast();
+
 
 }

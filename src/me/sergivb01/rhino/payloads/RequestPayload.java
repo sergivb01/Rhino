@@ -1,15 +1,20 @@
 package me.sergivb01.rhino.payloads;
 
+import lombok.Getter;
 import me.sergivb01.rhino.payloads.utils.Payload;
 import org.bson.Document;
 
 import java.util.UUID;
 
-public class RequestPayload extends Payload{
+@Getter public class RequestPayload extends Payload{
 	private UUID uuid;
 	private String playerName;
 	private UUID playerUUID;
 	private String reason;
+
+	public RequestPayload(){
+		super("request");
+	}
 
 	public RequestPayload(String playerName, UUID playerUUID, String reason){
 		super("request");
@@ -33,6 +38,9 @@ public class RequestPayload extends Payload{
 				.append("uuid", uuid);
 	}
 
+	public void broadcast(){
+		//TODO: Broadcast
+	}
 
 }
 

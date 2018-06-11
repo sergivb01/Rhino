@@ -34,6 +34,9 @@ public class Cache{
 			case "request":
 				return payloads.stream().filter(payload -> payload instanceof RequestPayload).collect(Collectors.toList());
 
+			case "serverswitch":
+				return payloads.stream().filter(payload -> payload instanceof RequestPayload).collect(Collectors.toList());
+
 		}
 		return null;
 	}
