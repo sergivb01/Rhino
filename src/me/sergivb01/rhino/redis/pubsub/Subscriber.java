@@ -10,10 +10,9 @@ import redis.clients.jedis.JedisPubSub;
 
 import java.util.Arrays;
 
-@Getter
 public class Subscriber{
 	private RhinoPlugin instance;
-	private JedisPubSub jedisPubSub;
+	@Getter private JedisPubSub jedisPubSub;
 	private Jedis jedis;
 
 	public Subscriber(RhinoPlugin instance){
@@ -49,23 +48,31 @@ public class Subscriber{
 				instance.getLogger().warning("Recived unknown redis message! " + Arrays.toString(args));
 			}
 
-			//Ignore others
+			@Override
 			public void onPMessage(String s, String s1, String s2){
 
 			}
 
+			@Override
 			public void onSubscribe(String s, int i){
 
 			}
 
+			@Override
 			public void onUnsubscribe(String s, int i){
+
 			}
 
+			@Override
 			public void onPUnsubscribe(String s, int i){
+
 			}
 
+			@Override
 			public void onPSubscribe(String s, int i){
+
 			}
+
 		};
 	}
 

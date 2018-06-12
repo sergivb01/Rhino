@@ -51,8 +51,8 @@ public class RhinoPlugin extends JavaPlugin{
 	}
 
 	public void onDisable(){
-		RedisManager.subscriber.getJedis().shutdown();
-		RedisManager.publisher.getPool().destroy();
+		RedisManager.getSubscriber().getJedisPubSub().unsubscribe();
+		RedisManager.getPublisher().getPool().destroy();
 	}
 
 
